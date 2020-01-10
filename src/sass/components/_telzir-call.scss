@@ -1,0 +1,57 @@
+.telzir-call {
+  margin-bottom: 30px;
+}
+
+.telzir-call__field-wrp {
+  display: flex;
+  justify-content: space-between;
+
+  .telzir-call__select,
+  input {
+    background: #fff;
+    border: 2px solid #d44b4d;
+    padding: 0 20px;
+    border-radius: 5px;
+    height: 60px;
+    width: 23%;
+    font-weight: 600;
+    font-size: 20px;
+    color: #000;
+    text-transform: uppercase;
+  }
+
+  input::placeholder {
+    color: #000;
+  }
+
+  .telzir-call__select {
+    position: relative;
+
+    ul {
+      list-style: none;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 50px;
+      border-radius: 5px;
+      overflow: hidden;
+
+      li {
+        height: 60px;
+        color: #fff;
+        background: #d44b4d;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:nth-child(even) {
+          background: #c13436;
+        }
+      }
+    }
+  }
+
+  .telzir-call__select-placeholder {
+  }
+}

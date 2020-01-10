@@ -6,17 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Career Vizir</title>
-
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
-    <header class="container">
+    <header class="container header">
+      <img src="images/logo.png" alt="Logo Vizir" />
       <h1>Career Vizir - Chamadas Telzir</h1>
     </header>
 
-    <script src="app.min.js"></script>
+    <div class="page-wrapper">
+      <div class="telzir-call" action="">
+        <div class="telzir-call__field-wrp">
+          <div class="telzir-call__select telzir-call__origin">
+            <div class="telzir-call__select-placeholder">
+              Origin
+            </div>
+
+            <ul>
+              <li>011</li>
+              <li>016</li>
+              <li>017</li>
+              <li>018</li>
+            </ul>
+          </div>
+
+          <div class="telzir-call__select telzir-call__destiny">
+            <div class="telzir-call__select-placeholder">
+              Destiny
+            </div>
+
+            <ul>
+              <li>011</li>
+              <li>016</li>
+              <li>017</li>
+              <li>018</li>
+            </ul>
+          </div>
+
+          <input
+            class="telzir-call__destiny-time-minute"
+            type="text"
+            placeholder="Time in minutes"
+          />
+
+          <div class="telzir-call__select telzir-call__destiny">
+            <div class="telzir-call__select-placeholder">
+              Com FaleMais
+            </div>
+
+            <ul>
+              <li>FaleMais 30</li>
+              <li>FaleMais 60</li>
+              <li>FaleMais 120</li>
+              <li>FaleMais 30</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="telzir-call-fares">
+        <div class="telzir-call-fares__field with-plan">
+          <span>
+            Com FaleMais
+          </span>
+
+          $ 0,00
+        </div>
+
+        <div class="telzir-call-fares__field no-plan">
+          <span>
+            Sem FaleMais
+          </span>
+
+          $ 38,00
+        </div>
+      </div>
+    </div>
   </body>
 </html>
