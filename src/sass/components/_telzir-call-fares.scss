@@ -1,0 +1,33 @@
+.telzir-call-fares {
+  display: flex;
+  justify-content: space-between;
+}
+
+.telzir-call-fares__field {
+  width: 48.7%;
+  height: 60px;
+  background: #fff;
+  border: 2px solid #538cc4;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+
+  span {
+    height: 100%;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+  }
+
+  .label {
+    font-weight: bold;
+    width: 47%;
+    justify-content: center;
+    text-transform: uppercase;
+    color: #fff;
+    background: #538cc4;
+  }
+
+  .number {
+  }
+}
