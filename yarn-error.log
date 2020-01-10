@@ -1,0 +1,65 @@
+Arguments: 
+  /usr/local/Cellar/node/13.5.0/bin/node /usr/local/Cellar/yarn/1.21.1/libexec/bin/yarn.js init
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.21.1
+
+Node version: 
+  13.5.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/usr/local/Cellar/yarn/1.21.1/libexec/lib/cli.js:136925:13)
+      at Interface.emit (events.js:305:20)
+      at Interface._ttyWrite (readline.js:882:16)
+      at ReadStream.onkeypress (readline.js:199:10)
+      at ReadStream.emit (events.js:305:20)
+      at emitKeys (internal/readline/utils.js:439:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1150:36)
+      at ReadStream.emit (events.js:305:20)
+      at addChunk (_stream_readable.js:341:12)
+
+npm manifest: 
+  {
+    "name": "career-vizir",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://asousajnri@github.com/asousajnri/career-vizir.git",
+    "author": "Antônio Sousa <a.sousa.jnri@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+      "build": "webpack",
+      "test": "jest",
+      "start": "webpack-dev-server"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.3.4",
+      "@babel/plugin-proposal-class-properties": "^7.3.4",
+      "@babel/preset-env": "^7.3.4",
+      "babel-eslint": "^10.0.1",
+      "babel-loader": "^8.0.5",
+      "eslint": "^5.15.0",
+      "eslint-config-standard": "^12.0.0",
+      "eslint-plugin-import": "^2.16.0",
+      "eslint-plugin-node": "^8.0.1",
+      "eslint-plugin-promise": "^4.0.1",
+      "eslint-plugin-standard": "^4.0.0",
+      "prettier": "1.16.4",
+      "webpack": "^4.29.6",
+      "webpack-cli": "^3.2.3",
+      "webpack-dev-server": "^3.2.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
