@@ -3,31 +3,63 @@
   justify-content: space-between;
 }
 
+.telzir-call-fares__fields {
+  display: flex;
+  flex-direction: column;
+  width: 48.5%;
+}
+
 .telzir-call-fares__field {
-  width: 48.7%;
-  height: 60px;
+  width: 100%;
   background: #fff;
   border: 2px solid #538cc4;
   border-radius: 5px;
   display: flex;
   align-items: center;
+  margin-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   span {
-    height: 100%;
     padding: 0 30px;
     display: flex;
     align-items: center;
+    height: 60px;
   }
 
   .label {
     font-weight: bold;
-    width: 47%;
+    width: 100%;
+    font-size: 25px;
     justify-content: center;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     color: #fff;
     background: #538cc4;
   }
 
   .number {
+  }
+}
+
+.telzir-call-fares__notify {
+  width: 48.5%;
+  border: 2px dashed;
+  padding: 30px;
+  background: #fff;
+  border-radius: 5px;
+
+  h3 {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #d44b4d;
+  }
+
+  p {
+    font-size: 16px;
   }
 }
