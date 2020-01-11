@@ -1,7 +1,5 @@
 export default (() => {
   const _getMinutesValue = (dataFares, origin, destiny) => {
-    // console.log(dataFares);
-
     for (let fare in dataFares) {
       if (dataFares.hasOwnProperty(fare)) {
         if (

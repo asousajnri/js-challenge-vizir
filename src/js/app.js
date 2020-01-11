@@ -19,6 +19,13 @@ export default (() => {
   const FARE_WITH_PLAN = document.querySelector('.with-plan .number');
   const FARE_NO_PLAN = document.querySelector('.no-plan .number');
 
+  const NOTIFICATION_BLOCK = document.querySelector(
+    '.telzir-call__notification'
+  );
+
+  NOTIFICATION_BLOCK.textContent =
+    'Não existe tarifa para o que você escolheu (origem/destino)!';
+
   Renders.renderSelects(ddd, SELECT_ORIGIN);
   Renders.renderSelects(ddd, SELECT_DESTINY);
   Renders.renderSelects(plans, SELECT_PLAN);
@@ -43,27 +50,17 @@ export default (() => {
       placeholderDestinyValue
     );
 
-    // let valueWithPlan = null;
-    // let valeuPlansOnMinute = flatRatesAction.getValuePlansMinute(
-    //   plans,
-    //   placeholderPlanValue
-    // );
+    if (placeholderOriginValue === placeholderDestinyValue) {
+      NOTIFICATION_BLOCK.classList.add('show');
 
-    // console.log(valeuPlansOnMinute);
+      //   let timerShowNotification = setTimeout(() => {
+      //     NOTIFICATION_BLOCK.classList.remove('show');
+      //   }, 3000);
 
-    // if (placeholderPlanValue === plans[2]) {
-    //   if (inputMinutesValue > 120) {
-    //     let percentes = (valueMinutes * 10) / 100;
-    //     console.log(percentes);
-    //     console.log(placeholderPlanValue);
-
-    //     valueWithPlan = parseFloat(
-    //       (valueMinutes + percentes) * (inputMinutesValue - 120)
-    //     ).toFixed(2);
-
-    //     console.log(valueWithPlan);
-    //   }
-    // }
+      //   clearTimeout(timerShowNotification);
+    } else {
+      NOTIFICATION_BLOCK.classList.remove('show');
+    }
 
     plans.map(plan => {
       if (plan != placeholderPlanValue) return;
@@ -76,11 +73,19 @@ export default (() => {
           (inputMinutesValue - valueMinutesCurrentPlan)
       ).toFixed(2);
 
-      if (!isNaN(valueWithPlan))
+      if (
+        !isNaN(valueWithPlan) &&
+        inputMinutesValue >= valueMinutesCurrentPlan
+      ) {
         FARE_WITH_PLAN.textContent = `$ ${valueWithPlan}`;
+      } else {
+        FARE_WITH_PLAN.textContent = `$ 0.00`;
+      }
     });
 
-    let valueNoPlan = parseFloat(valueMinutes * inputMinutesValue).toFixed(2);
+    let valueNoPlan = valueMinutes
+      ? parseFloat(valueMinutes * inputMinutesValue).toFixed(2)
+      : parseFloat(0.0).toFixed(2);
     if (!isNaN(valueNoPlan)) FARE_NO_PLAN.textContent = `$ ${valueNoPlan}`;
   };
 
@@ -89,6 +94,7 @@ export default (() => {
       let placeholderElem = currentParentElem.querySelector(
         '.telzir-call__select-placeholder'
       );
+
       placeholderElem.textContent = listenedField.textContent;
       mainFieldsControllers();
     } else {
@@ -98,6 +104,7 @@ export default (() => {
 
           return;
         }
+
         mainFieldsControllers();
       }, 100);
     }
