@@ -17,7 +17,7 @@ export default (() => {
   );
 
   const FARE_WITH_PLAN = document.querySelector('.with-plan .number');
-  const FARE_WITH_NO_PLAN = document.querySelector('.no-plan .number');
+  const FARE_NO_PLAN = document.querySelector('.no-plan .number');
 
   Renders.renderSelects(ddd, SELECT_ORIGIN);
   Renders.renderSelects(ddd, SELECT_DESTINY);
@@ -43,10 +43,45 @@ export default (() => {
       placeholderDestinyValue
     );
 
+    // let valueWithPlan = null;
+    // let valeuPlansOnMinute = flatRatesAction.getValuePlansMinute(
+    //   plans,
+    //   placeholderPlanValue
+    // );
+
+    // console.log(valeuPlansOnMinute);
+
+    // if (placeholderPlanValue === plans[2]) {
+    //   if (inputMinutesValue > 120) {
+    //     let percentes = (valueMinutes * 10) / 100;
+    //     console.log(percentes);
+    //     console.log(placeholderPlanValue);
+
+    //     valueWithPlan = parseFloat(
+    //       (valueMinutes + percentes) * (inputMinutesValue - 120)
+    //     ).toFixed(2);
+
+    //     console.log(valueWithPlan);
+    //   }
+    // }
+
+    plans.map(plan => {
+      if (plan != placeholderPlanValue) return;
+
+      let valueMinutesCurrentPlan = parseInt(plan.match(/\d+/g));
+      let percentes = (valueMinutes * 10) / 100;
+
+      let valueWithPlan = parseFloat(
+        (valueMinutes + percentes) *
+          (inputMinutesValue - valueMinutesCurrentPlan)
+      ).toFixed(2);
+
+      if (!isNaN(valueWithPlan))
+        FARE_WITH_PLAN.textContent = `$ ${valueWithPlan}`;
+    });
+
     let valueNoPlan = parseFloat(valueMinutes * inputMinutesValue).toFixed(2);
-    if (!isNaN(valueNoPlan)) {
-      FARE_WITH_NO_PLAN.textContent = `$ ${valueNoPlan}`;
-    }
+    if (!isNaN(valueNoPlan)) FARE_NO_PLAN.textContent = `$ ${valueNoPlan}`;
   };
 
   const controllerFieldActions = (listenedField, currentParentElem) => {
@@ -71,6 +106,10 @@ export default (() => {
   optionsAll.map(option => {
     option.addEventListener('click', ({ target }) => {
       let parentElemt = target.closest('.telzir-call__select');
+      parentElemt.classList.add('hide');
+      setTimeout(() => {
+        parentElemt.classList.remove('hide');
+      }, 200);
       controllerFieldActions(target, parentElemt);
     });
   });

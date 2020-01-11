@@ -55,6 +55,14 @@
       }
     }
 
+    &.hide {
+      ul {
+        top: 25px;
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
     ul {
       list-style: none;
       width: 100%;
