@@ -1,127 +1,46 @@
 import '../sass/app.scss';
-import data from '../services/data';
 
-import Renders from './modules/renders';
-import getOptionsElem from './modules/get-options-elements';
-import flatRatesAction from './modules/flat-rates-action';
+import calculateFare from './modules/calculate-fare';
 
 export default (() => {
-  const { ddd, plans, flatRate } = data;
+  const SELECTS = Array.from(document.querySelectorAll('.telzir-call__select'));
 
-  const INPUT_FILDS = document.querySelector('.telzir-call__field-wrp');
-  const SELECT_ORIGIN = INPUT_FILDS.querySelector('.telzir-call__origin');
-  const SELECT_DESTINY = INPUT_FILDS.querySelector('.telzir-call__destiny');
-  const SELECT_PLAN = INPUT_FILDS.querySelector('.telzir-call__plan');
-  const INPUT_MINUTES = INPUT_FILDS.querySelector(
+  const INPUT_MINUTES = document.querySelector(
     '.telzir-call__destiny-time-minute'
   );
 
-  const FARE_WITH_PLAN = document.querySelector('.with-plan .number');
-  const FARE_NO_PLAN = document.querySelector('.no-plan .number');
-
-  const NOTIFICATION_BLOCK = document.querySelector(
-    '.telzir-call__notification'
+  const FIELD_TO_SET_RESULT_WITH_PLAN = document.querySelector(
+    '.with-plan .number'
+  );
+  const FIELD_TO_SET_RESULT_NO_PLAN = document.querySelector(
+    '.no-plan .number'
   );
 
-  NOTIFICATION_BLOCK.textContent =
-    'Não existe tarifa para o que você escolheu (origem/destino)!';
+  const fieldsController = () => {
+    let origin = SELECTS[0].value;
+    let destiny = SELECTS[1].value;
+    let plan = SELECTS[2].value;
+    let minutes = INPUT_MINUTES.value;
 
-  Renders.renderSelects(ddd, SELECT_ORIGIN);
-  Renders.renderSelects(ddd, SELECT_DESTINY);
-  Renders.renderSelects(plans, SELECT_PLAN);
+    let result = calculateFare(origin, destiny, minutes, plan);
 
-  const optionsAll = getOptionsElem(INPUT_FILDS);
+    FIELD_TO_SET_RESULT_WITH_PLAN.textContent = `$ ${result.withPlan}`;
+    FIELD_TO_SET_RESULT_NO_PLAN.textContent = `$ ${result.noPlan}`;
+  };
 
-  const mainFieldsControllers = () => {
-    let placeholderOriginValue = SELECT_ORIGIN.querySelector(
-      '.telzir-call__select-placeholder'
-    ).textContent;
-    let placeholderDestinyValue = SELECT_DESTINY.querySelector(
-      '.telzir-call__select-placeholder'
-    ).textContent;
-    let placeholderPlanValue = SELECT_PLAN.querySelector(
-      '.telzir-call__select-placeholder'
-    ).textContent;
-    let inputMinutesValue = INPUT_MINUTES.value;
-
-    let valueMinutes = flatRatesAction.getMinutesValue(
-      flatRate,
-      placeholderOriginValue,
-      placeholderDestinyValue
-    );
-
-    if (placeholderOriginValue === placeholderDestinyValue) {
-      NOTIFICATION_BLOCK.classList.add('show');
-
-      //   let timerShowNotification = setTimeout(() => {
-      //     NOTIFICATION_BLOCK.classList.remove('show');
-      //   }, 3000);
-
-      //   clearTimeout(timerShowNotification);
-    } else {
-      NOTIFICATION_BLOCK.classList.remove('show');
-    }
-
-    plans.map(plan => {
-      if (plan != placeholderPlanValue) return;
-
-      let valueMinutesCurrentPlan = parseInt(plan.match(/\d+/g));
-      let percentes = (valueMinutes * 10) / 100;
-
-      let valueWithPlan = parseFloat(
-        (valueMinutes + percentes) *
-          (inputMinutesValue - valueMinutesCurrentPlan)
-      ).toFixed(2);
-
-      if (
-        !isNaN(valueWithPlan) &&
-        inputMinutesValue >= valueMinutesCurrentPlan
-      ) {
-        FARE_WITH_PLAN.textContent = `$ ${valueWithPlan}`;
-      } else {
-        FARE_WITH_PLAN.textContent = `$ 0.00`;
+  INPUT_MINUTES.addEventListener('keydown', e => {
+    setTimeout(() => {
+      if (isNaN(e.target.value)) {
+        e.target.value = '';
       }
-    });
 
-    let valueNoPlan = valueMinutes
-      ? parseFloat(valueMinutes * inputMinutesValue).toFixed(2)
-      : parseFloat(0.0).toFixed(2);
-    if (!isNaN(valueNoPlan)) FARE_NO_PLAN.textContent = `$ ${valueNoPlan}`;
-  };
-
-  const controllerFieldActions = (listenedField, currentParentElem) => {
-    if (currentParentElem && listenedField.nodeName != 'INPUT') {
-      let placeholderElem = currentParentElem.querySelector(
-        '.telzir-call__select-placeholder'
-      );
-
-      placeholderElem.textContent = listenedField.textContent;
-      mainFieldsControllers();
-    } else {
-      setTimeout(() => {
-        if (isNaN(listenedField.value)) {
-          listenedField.value = '';
-
-          return;
-        }
-
-        mainFieldsControllers();
-      }, 100);
-    }
-  };
-
-  optionsAll.map(option => {
-    option.addEventListener('click', ({ target }) => {
-      let parentElemt = target.closest('.telzir-call__select');
-      parentElemt.classList.add('hide');
-      setTimeout(() => {
-        parentElemt.classList.remove('hide');
-      }, 200);
-      controllerFieldActions(target, parentElemt);
-    });
+      if ((e.target.value > 10 && e.target.value) || e.key === 'Backspace') {
+        fieldsController();
+      }
+    }, 100);
   });
 
-  INPUT_MINUTES.addEventListener('keydown', ({ target }) => {
-    controllerFieldActions(target);
+  SELECTS.map(select => {
+    select.addEventListener('change', () => fieldsController());
   });
 })();

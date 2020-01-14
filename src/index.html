@@ -14,23 +14,23 @@
     </header>
 
     <div class="page-wrapper">
-      <div class="telzir-call" action="">
+      <div class="telzir-call">
         <div class="telzir-call__field-wrp">
-          <div class="telzir-call__select telzir-call__origin">
-            <div class="telzir-call__select-placeholder">
-              Origem
-            </div>
+          <select class="telzir-call__select telzir-call__origin">
+            <option value="">Origem</option>
+            <option value="011">011</option>
+            <option value="016">016</option>
+            <option value="017">017</option>
+            <option value="018">018</option>
+          </select>
 
-            <ul class="telzir-call__select-options"></ul>
-          </div>
-
-          <div class="telzir-call__select telzir-call__destiny">
-            <div class="telzir-call__select-placeholder">
-              Destino
-            </div>
-
-            <ul class="telzir-call__select-options"></ul>
-          </div>
+          <select class="telzir-call__select telzir-call__destiny">
+            <option value="">Destino</option>
+            <option value="011">011</option>
+            <option value="016">016</option>
+            <option value="017">017</option>
+            <option value="018">018</option>
+          </select>
 
           <input
             class="telzir-call__destiny-time-minute"
@@ -38,17 +38,13 @@
             placeholder="Tempo (minutos)"
           />
 
-          <div class="telzir-call__select telzir-call__plan">
-            <div class="telzir-call__select-placeholder">
-              Selecione o plano
-            </div>
-
-            <ul class="telzir-call__select-options"></ul>
-          </div>
-        </div>
+          <select class="telzir-call__select telzir-call__plan">
+            <option value="">Plano</option>
+            <option value="FaleMais 30">FaleMais 30</option>
+            <option value="FaleMais 60">FaleMais 60</option>
+            <option value="Fale 120">FaleMais 120</option>
+          </select>
       </div>
-
-      <div class="telzir-call__notification"></div>
 
       <div class="telzir-call-fares">
         <div class="telzir-call-fares__notify">

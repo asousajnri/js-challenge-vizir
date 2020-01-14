@@ -1,7 +1,10 @@
 export default {
-  ddd: ['011', '016', '017', '018'],
-  plans: ['FaleMais 30', 'FaleMais 60', 'FaleMais 120'],
-  flatRate: {
+  plansList: {
+    'FaleMais 30': 30,
+    'FaleMais 60': 60,
+    'FaleMais 120': 120,
+  },
+  flatRates: {
     flatRate1: {
       origin: '011',
       destiny: '016',
